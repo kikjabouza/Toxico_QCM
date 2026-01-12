@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QCM - Toxicologie Générale</title>
+    <title>QCM - Toxicologie Générale - Version Complète</title>
     <style>
         * {
             box-sizing: border-box;
@@ -19,9 +19,9 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.97);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
@@ -41,6 +41,34 @@
             font-size: 1.1rem;
         }
 
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tab:hover {
+            background-color: #d5dbdb;
+        }
+
+        .tab.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+
         .section {
             background-color: #f8f9fa;
             border-radius: 15px;
@@ -48,6 +76,12 @@
             margin-bottom: 30px;
             border-left: 5px solid #3498db;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
         }
 
         .section-title {
@@ -64,6 +98,13 @@
             color: #3498db;
             font-size: 2rem;
             margin-right: 10px;
+        }
+
+        .question-counter {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            text-align: right;
         }
 
         .question {
@@ -164,12 +205,23 @@
             transition: all 0.3s ease;
         }
 
-        #submitBtn {
+        #submitAllBtn {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        #submitAllBtn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        #submitSectionBtn {
             background-color: #3498db;
             color: white;
         }
 
-        #submitBtn:hover {
+        #submitSectionBtn:hover {
             background-color: #2980b9;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
@@ -218,7 +270,7 @@
             background-color: #ecf0f1;
             border-radius: 10px;
             margin: 20px auto;
-            max-width: 400px;
+            max-width: 500px;
             overflow: hidden;
         }
 
@@ -228,6 +280,33 @@
             border-radius: 10px;
             width: 0%;
             transition: width 1s ease;
+        }
+
+        .section-scores {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .section-score {
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            min-width: 120px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-score h4 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+
+        .section-score-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
         }
 
         @keyframes fadeIn {
@@ -248,6 +327,12 @@
                 font-size: 2rem;
             }
             
+            .nav-tabs {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+            
             .controls {
                 flex-direction: column;
                 gap: 15px;
@@ -264,747 +349,1559 @@
         <h1>QCM de Toxicologie Générale</h1>
         <p class="subtitle">Master Biologie et Santé - Master Ingénierie de l'Environnement et Développement Durable</p>
         
-        <!-- Section 1: Introduction à la toxicologie -->
-        <div class="section">
+        <!-- Navigation par onglets -->
+        <div class="nav-tabs">
+            <div class="tab active" data-section="section1">Partie 1: Intro Toxicologie</div>
+            <div class="tab" data-section="section2">Partie 2: Aluminium</div>
+            <div class="tab" data-section="section3">Partie 3: Pesticides</div>
+            <div class="tab" data-section="section4">Partie 4: Plantes toxiques</div>
+            <div class="tab" data-section="section5">Partie 5: Bactérioses</div>
+            <div class="tab" data-section="section6">Partie 6: Hépatites virales</div>
+            <div class="tab" data-section="section7">Partie 7: Addictions</div>
+            <div class="tab" data-section="section8">Partie 8: Écotoxicologie</div>
+        </div>
+        
+        <!-- ============ PARTIE 1: INTRODUCTION À LA TOXICOLOGIE ============ -->
+        <div class="section active" id="section1">
             <h2 class="section-title">Partie 1: Introduction à la toxicologie</h2>
+            <div class="question-counter">Questions 1 à 15</div>
             
+            <!-- Question 1 -->
             <div class="question" data-correct="b">
                 <div class="question-text">1. Qui est considéré comme le père de la toxicologie moderne ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q1" value="a"> 
-                        <span>Hippocrate</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="b"> 
-                        <span>Paracelse</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="c"> 
-                        <span>Galien</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q1" value="d"> 
-                        <span>Avicenne</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q1" value="a"> <span>Hippocrate</span></label>
+                    <label class="option"><input type="radio" name="q1" value="b"> <span>Paracelse</span></label>
+                    <label class="option"><input type="radio" name="q1" value="c"> <span>Galien</span></label>
+                    <label class="option"><input type="radio" name="q1" value="d"> <span>Avicenne</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 2 -->
             <div class="question" data-correct="a">
                 <div class="question-text">2. Quelle est la définition de la toxicologie selon le cours ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q2" value="a"> 
-                        <span>La science qui étudie les substances toxiques, leurs effets, leurs mécanismes d'action, et les moyens de les détecter et neutraliser</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q2" value="b"> 
-                        <span>L'étude exclusive des poisons d'origine végétale</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q2" value="c"> 
-                        <span>La science des antidotes et traitements d'urgence</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q2" value="d"> 
-                        <span>L'analyse des effets des médicaments à doses thérapeutiques</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q2" value="a"> <span>La science qui étudie les substances toxiques, leurs effets, leurs mécanismes d'action, et les moyens de les détecter et neutraliser</span></label>
+                    <label class="option"><input type="radio" name="q2" value="b"> <span>L'étude exclusive des poisons d'origine végétale</span></label>
+                    <label class="option"><input type="radio" name="q2" value="c"> <span>La science des antidotes et traitements d'urgence</span></label>
+                    <label class="option"><input type="radio" name="q2" value="d"> <span>L'analyse des effets des médicaments à doses thérapeutiques</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 3 -->
             <div class="question" data-correct="c">
                 <div class="question-text">3. Qu'est-ce qu'un "toxique" ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q3" value="a"> 
-                        <span>Uniquement une substance chimique synthétique</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3" value="b"> 
-                        <span>Toute substance naturelle</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3" value="c"> 
-                        <span>Une substance chimique, biologique ou physique capable de provoquer des effets néfastes sur la santé</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q3" value="d"> 
-                        <span>Seulement les substances mortelles à faible dose</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q3" value="a"> <span>Uniquement une substance chimique synthétique</span></label>
+                    <label class="option"><input type="radio" name="q3" value="b"> <span>Toute substance naturelle</span></label>
+                    <label class="option"><input type="radio" name="q3" value="c"> <span>Une substance chimique, biologique ou physique capable de provoquer des effets néfastes sur la santé</span></label>
+                    <label class="option"><input type="radio" name="q3" value="d"> <span>Seulement les substances mortelles à faible dose</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 4 -->
             <div class="question" data-correct="d">
                 <div class="question-text">4. De quels facteurs dépend le caractère toxique d'une substance ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q4" value="a"> 
-                        <span>Uniquement de la dose</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q4" value="b"> 
-                        <span>De la couleur et de l'odeur</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q4" value="c"> 
-                        <span>Du prix et de la disponibilité</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q4" value="d"> 
-                        <span>De la dose, de la voie d'exposition et de la durée d'exposition</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q4" value="a"> <span>Uniquement de la dose</span></label>
+                    <label class="option"><input type="radio" name="q4" value="b"> <span>De la couleur et de l'odeur</span></label>
+                    <label class="option"><input type="radio" name="q4" value="c"> <span>Du prix et de la disponibilité</span></label>
+                    <label class="option"><input type="radio" name="q4" value="d"> <span>De la dose, de la voie d'exposition et de la durée d'exposition</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 5 -->
             <div class="question" data-correct="a">
-                <div class="question-text">5. Quelles sont les quatre principales voies de pénétration des toxiques ?</div>
+                <div class="question-text">5. Comment classe-t-on les toxiques selon leur nature ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q5" value="a"> 
-                        <span>Respiratoire, digestive, cutanée et parentérale</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q5" value="b"> 
-                        <span>Orale, nasale, oculaire et auriculaire</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q5" value="c"> 
-                        <span>Directe, indirecte, accidentelle et volontaire</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q5" value="d"> 
-                        <span>Naturelle, synthétique, environnementale et industrielle</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q5" value="a"> <span>Organiques, inorganiques ou métalliques</span></label>
+                    <label class="option"><input type="radio" name="q5" value="b"> <span>Solides, liquides ou gazeux</span></label>
+                    <label class="option"><input type="radio" name="q5" value="c"> <span>Naturels ou synthétiques</span></label>
+                    <label class="option"><input type="radio" name="q5" value="d"> <span>Végétaux, animaux ou minéraux</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 6 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">6. Citez un exemple de toxique physique :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q6" value="a"> <span>Le cyanure</span></label>
+                    <label class="option"><input type="radio" name="q6" value="b"> <span>Les ondes électromagnétiques</span></label>
+                    <label class="option"><input type="radio" name="q6" value="c"> <span>Le mercure</span></label>
+                    <label class="option"><input type="radio" name="q6" value="d"> <span>La toxine botulique</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 7 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">7. Quelle est la définition de l'exposition ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q7" value="a"> <span>La quantité de substance absorbée</span></label>
+                    <label class="option"><input type="radio" name="q7" value="b"> <span>La durée de contact avec la substance</span></label>
+                    <label class="option"><input type="radio" name="q7" value="c"> <span>Le contact entre un organisme vivant et une substance toxique</span></label>
+                    <label class="option"><input type="radio" name="q7" value="d"> <span>La voie d'entrée de la substance dans l'organisme</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 8 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">8. Qu'est-ce qu'une exposition aiguë ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q8" value="a"> <span>Une exposition de court terme à une forte dose</span></label>
+                    <label class="option"><input type="radio" name="q8" value="b"> <span>Une exposition de long terme à faible dose</span></label>
+                    <label class="option"><input type="radio" name="q8" value="c"> <span>Une exposition accidentelle unique</span></label>
+                    <label class="option"><input type="radio" name="q8" value="d"> <span>Une exposition professionnelle régulière</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 9 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">9. Qu'est-ce qu'une exposition chronique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q9" value="a"> <span>Une exposition unique à très forte dose</span></label>
+                    <label class="option"><input type="radio" name="q9" value="b"> <span>Une exposition de long terme à des doses faibles ou modérées</span></label>
+                    <label class="option"><input type="radio" name="q9" value="c"> <span>Une exposition par voie cutanée</span></label>
+                    <label class="option"><input type="radio" name="q9" value="d"> <span>Une exposition accidentelle</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 10 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">10. Quelles sont les quatre principales voies de pénétration des toxiques ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q10" value="a"> <span>Nasale, buccale, cutanée, rectale</span></label>
+                    <label class="option"><input type="radio" name="q10" value="b"> <span>Orale, respiratoire, sanguine, lymphatique</span></label>
+                    <label class="option"><input type="radio" name="q10" value="c"> <span>Digestive, pulmonaire, hépatique, rénale</span></label>
+                    <label class="option"><input type="radio" name="q10" value="d"> <span>Respiratoire, digestive, cutanée, parentérale</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 11 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">11. Qu'étudie la toxicocinétique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q11" value="a"> <span>Les processus d'absorption, distribution, métabolisme et élimination (ADME)</span></label>
+                    <label class="option"><input type="radio" name="q11" value="b"> <span>Les effets des toxiques sur les organes cibles</span></label>
+                    <label class="option"><input type="radio" name="q11" value="c"> <span>Les mécanismes d'action moléculaire</span></label>
+                    <label class="option"><input type="radio" name="q11" value="d"> <span>Les symptômes cliniques des intoxications</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 12 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">12. Quelle est la différence entre "danger" et "risque" ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q12" value="a"> <span>Le danger dépend de la dose, le risque de la durée</span></label>
+                    <label class="option"><input type="radio" name="q12" value="b"> <span>Le risque est théorique, le danger est pratique</span></label>
+                    <label class="option"><input type="radio" name="q12" value="c"> <span>Le danger est la capacité intrinsèque à nuire, le risque est la probabilité que cet effet se produise</span></label>
+                    <label class="option"><input type="radio" name="q12" value="d"> <span>Le danger concerne les produits chimiques, le risque les produits biologiques</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 13 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">13. Où se produit généralement le métabolisme des toxiques ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q13" value="a"> <span>Dans les reins</span></label>
+                    <label class="option"><input type="radio" name="q13" value="b"> <span>Principalement dans le foie</span></label>
+                    <label class="option"><input type="radio" name="q13" value="c"> <span>Dans les poumons</span></label>
+                    <label class="option"><input type="radio" name="q13" value="d"> <span>Dans le système nerveux central</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 14 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">14. Quelles sont les principales voies d'élimination des toxiques ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q14" value="a"> <span>La salive et la transpiration</span></label>
+                    <label class="option"><input type="radio" name="q14" value="b"> <span>Les larmes et le sébum</span></label>
+                    <label class="option"><input type="radio" name="q14" value="c"> <span>Le sang et la lymphe</span></label>
+                    <label class="option"><input type="radio" name="q14" value="d"> <span>L'urine, les fèces ou la respiration</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 15 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">15. Un produit très dangereux présente-t-il toujours un risque élevé ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q15" value="a"> <span>Oui, toujours</span></label>
+                    <label class="option"><input type="radio" name="q15" value="b"> <span>Non, si l'exposition est faible ou bien contrôlée</span></label>
+                    <label class="option"><input type="radio" name="q15" value="c"> <span>Seulement pour les produits chimiques</span></label>
+                    <label class="option"><input type="radio" name="q15" value="d"> <span>Uniquement en milieu professionnel</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
         </div>
         
-        <!-- Section 2: Aluminium -->
-        <div class="section">
+        <!-- ============ PARTIE 2: ALUMINIUM ============ -->
+        <div class="section" id="section2">
             <h2 class="section-title">Partie 2: Les substances chimiques - Exemple de l'Aluminium</h2>
+            <div class="question-counter">Questions 16 à 30</div>
             
+            <!-- Question 16 -->
             <div class="question" data-correct="b">
-                <div class="question-text">6. Quel est le symbole chimique et le numéro atomique de l'aluminium ?</div>
+                <div class="question-text">16. Quel est le symbole chimique et le numéro atomique de l'aluminium ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q6" value="a"> 
-                        <span>Au, 79</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q6" value="b"> 
-                        <span>Al, 13</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q6" value="c"> 
-                        <span>Ag, 47</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q6" value="d"> 
-                        <span>Am, 95</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q16" value="a"> <span>Au, 79</span></label>
+                    <label class="option"><input type="radio" name="q16" value="b"> <span>Al, 13</span></label>
+                    <label class="option"><input type="radio" name="q16" value="c"> <span>Ag, 47</span></label>
+                    <label class="option"><input type="radio" name="q16" value="d"> <span>Am, 95</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 17 -->
             <div class="question" data-correct="c">
-                <div class="question-text">7. Quelle est la principale caractéristique physique de l'aluminium ?</div>
+                <div class="question-text">17. Quelle est la principale caractéristique physique de l'aluminium ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q7" value="a"> 
-                        <span>Lourd et fragile</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q7" value="b"> 
-                        <span>Magnétique et conducteur</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q7" value="c"> 
-                        <span>Léger, malléable et résistant à la corrosion</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q7" value="d"> 
-                        <span>Radioactif et fluorescent</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q17" value="a"> <span>Lourd et fragile</span></label>
+                    <label class="option"><input type="radio" name="q17" value="b"> <span>Magnétique et conducteur</span></label>
+                    <label class="option"><input type="radio" name="q17" value="c"> <span>Léger, malléable et résistant à la corrosion</span></label>
+                    <label class="option"><input type="radio" name="q17" value="d"> <span>Radioactif et fluorescent</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 18 -->
             <div class="question" data-correct="a">
-                <div class="question-text">8. Qui a isolé l'aluminium pour la première fois en 1825 ?</div>
+                <div class="question-text">18. Qui a isolé l'aluminium pour la première fois en 1825 ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q8" value="a"> 
-                        <span>Hans Christian Ørsted</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q8" value="b"> 
-                        <span>Marie Curie</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q8" value="c"> 
-                        <span>Dmitri Mendeleïev</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q8" value="d"> 
-                        <span>Antoine Lavoisier</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q18" value="a"> <span>Hans Christian Ørsted</span></label>
+                    <label class="option"><input type="radio" name="q18" value="b"> <span>Marie Curie</span></label>
+                    <label class="option"><input type="radio" name="q18" value="c"> <span>Dmitri Mendeleïev</span></label>
+                    <label class="option"><input type="radio" name="q18" value="d"> <span>Antoine Lavoisier</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 19 -->
             <div class="question" data-correct="d">
-                <div class="question-text">9. Quel minerai est la source principale d'aluminium ?</div>
+                <div class="question-text">19. Quel procédé a permis la production industrielle de l'aluminium en 1886 ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q9" value="a"> 
-                        <span>Hématite</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q9" value="b"> 
-                        <span>Pyrite</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q9" value="c"> 
-                        <span>Galène</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q9" value="d"> 
-                        <span>Bauxite</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q19" value="a"> <span>Procédé Haber-Bosch</span></label>
+                    <label class="option"><input type="radio" name="q19" value="b"> <span>Procédé Solvay</span></label>
+                    <label class="option"><input type="radio" name="q19" value="c"> <span>Procédé de flottation</span></label>
+                    <label class="option"><input type="radio" name="q19" value="d"> <span>Procédé d'électrolyse de Hall-Héroult</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 20 -->
             <div class="question" data-correct="b">
-                <div class="question-text">10. Où l'aluminium a-t-il tendance à s'accumuler dans le corps ?</div>
+                <div class="question-text">20. Quelle est la densité de l'aluminium ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q10" value="a"> 
-                        <span>Uniquement dans le foie</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q10" value="b"> 
-                        <span>Dans les os, le foie et le cerveau</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q10" value="c"> 
-                        <span>Exclusivement dans les reins</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q10" value="d"> 
-                        <span>Dans les muscles et le tissu adipeux</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q20" value="a"> <span>1,5 g/cm³</span></label>
+                    <label class="option"><input type="radio" name="q20" value="b"> <span>2,7 g/cm³</span></label>
+                    <label class="option"><input type="radio" name="q20" value="c"> <span>4,5 g/cm³</span></label>
+                    <label class="option"><input type="radio" name="q20" value="d"> <span>7,9 g/cm³</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 21 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">21. Quel minerai est la source principale d'aluminium ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q21" value="a"> <span>Hématite</span></label>
+                    <label class="option"><input type="radio" name="q21" value="b"> <span>Pyrite</span></label>
+                    <label class="option"><input type="radio" name="q21" value="c"> <span>Galène</span></label>
+                    <label class="option"><input type="radio" name="q21" value="d"> <span>Bauxite</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 22 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">22. Pourquoi l'aluminium est-il utilisé dans l'aéronautique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q22" value="a"> <span>Pour sa couleur argentée</span></label>
+                    <label class="option"><input type="radio" name="q22" value="b"> <span>Pour sa résistance à la chaleur</span></label>
+                    <label class="option"><input type="radio" name="q22" value="c"> <span>Pour sa légèreté</span></label>
+                    <label class="option"><input type="radio" name="q22" value="d"> <span>Pour son faible coût</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 23 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">23. L'aluminium est-il recyclable ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q23" value="a"> <span>Oui, il est recyclable à l'infini</span></label>
+                    <label class="option"><input type="radio" name="q23" value="b"> <span>Non, il perd ses propriétés au recyclage</span></label>
+                    <label class="option"><input type="radio" name="q23" value="c"> <span>Seulement une fois</span></label>
+                    <label class="option"><input type="radio" name="q23" value="d"> <span>Seulement s'il n'est pas oxydé</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 24 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">24. Quelle est la température de fusion de l'aluminium ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q24" value="a"> <span>1538°C</span></label>
+                    <label class="option"><input type="radio" name="q24" value="b"> <span>1084°C</span></label>
+                    <label class="option"><input type="radio" name="q24" value="c"> <span>327°C</span></label>
+                    <label class="option"><input type="radio" name="q24" value="d"> <span>660°C</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 25 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">25. Comment l'aluminium peut-il pénétrer dans l'organisme ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q25" value="a"> <span>Uniquement par ingestion</span></label>
+                    <label class="option"><input type="radio" name="q25" value="b"> <span>Par injection uniquement</span></label>
+                    <label class="option"><input type="radio" name="q25" value="c"> <span>Par ingestion, inhalation et absorption cutanée</span></label>
+                    <label class="option"><input type="radio" name="q25" value="d"> <span>Uniquement par voie respiratoire</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 26 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">26. Quelle voie d'exposition offre la plus grande biodisponibilité pour l'aluminium ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q26" value="a"> <span>La voie orale</span></label>
+                    <label class="option"><input type="radio" name="q26" value="b"> <span>L'inhalation</span></label>
+                    <label class="option"><input type="radio" name="q26" value="c"> <span>La voie cutanée</span></label>
+                    <label class="option"><input type="radio" name="q26" value="d"> <span>L'injection</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 27 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">27. Où l'aluminium a-t-il tendance à s'accumuler dans le corps ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q27" value="a"> <span>Dans les os, le foie et le cerveau</span></label>
+                    <label class="option"><input type="radio" name="q27" value="b"> <span>Uniquement dans les reins</span></label>
+                    <label class="option"><input type="radio" name="q27" value="c"> <span>Dans le tissu adipeux</span></label>
+                    <label class="option"><input type="radio" name="q27" value="d"> <span>Dans les muscles</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 28 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">28. Quel organe est responsable de l'excrétion de l'aluminium ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q28" value="a"> <span>Le foie</span></label>
+                    <label class="option"><input type="radio" name="q28" value="b"> <span>Les reins</span></label>
+                    <label class="option"><input type="radio" name="q28" value="c"> <span>Les poumons</span></label>
+                    <label class="option"><input type="radio" name="q28" value="d"> <span>La peau</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 29 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">29. Quels sont les symptômes d'une toxicité aiguë à l'aluminium ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q29" value="a"> <span>Paralysie et cécité</span></label>
+                    <label class="option"><input type="radio" name="q29" value="b"> <span>Hallucinations et convulsions</span></label>
+                    <label class="option"><input type="radio" name="q29" value="c"> <span>Nausées, vomissements, douleurs abdominales et problèmes respiratoires</span></label>
+                    <label class="option"><input type="radio" name="q29" value="d"> <span>Coma immédiat</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 30 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">30. Quelle maladie neurologique est souvent associée (bien que débattue) à l'exposition chronique à l'aluminium ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q30" value="a"> <span>Maladie de Parkinson</span></label>
+                    <label class="option"><input type="radio" name="q30" value="b"> <span>Sclérose en plaques</span></label>
+                    <label class="option"><input type="radio" name="q30" value="c"> <span>Maladie de Charcot</span></label>
+                    <label class="option"><input type="radio" name="q30" value="d"> <span>Maladie d'Alzheimer</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
         </div>
         
-        <!-- Section 3: Plantes toxiques -->
-        <div class="section">
-            <h2 class="section-title">Partie 3: Plantes toxiques</h2>
+        <!-- ============ PARTIE 3: PESTICIDES ============ -->
+        <div class="section" id="section3">
+            <h2 class="section-title">Partie 3: Produits phytosanitaires / Pesticides</h2>
+            <div class="question-counter">Questions 31 à 45</div>
             
+            <!-- Question 31 -->
             <div class="question" data-correct="c">
-                <div class="question-text">11. Quel est le nom scientifique de la Belladone ?</div>
+                <div class="question-text">31. Définition d'un pesticide :</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q11" value="a"> 
-                        <span>Datura stramonium</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q11" value="b"> 
-                        <span>Nerium oleander</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q11" value="c"> 
-                        <span>Atropa belladonna</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q11" value="d"> 
-                        <span>Ricinus communis</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q31" value="a"> <span>Substance uniquement chimique pour fertiliser les sols</span></label>
+                    <label class="option"><input type="radio" name="q31" value="b"> <span>Produit naturel pour stimuler la croissance des plantes</span></label>
+                    <label class="option"><input type="radio" name="q31" value="c"> <span>Substance chimique ou biologique conçue pour tuer, repousser ou contrôler des organismes nuisibles</span></label>
+                    <label class="option"><input type="radio" name="q31" value="d"> <span>Médicament pour traiter les maladies des plantes</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
-            <div class="question" data-correct="a">
-                <div class="question-text">12. Quel est le composé toxique majeur de la Belladone ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q12" value="a"> 
-                        <span>Hyoscyamine (alcaloïde tropanique)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q12" value="b"> 
-                        <span>Ricine</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q12" value="c"> 
-                        <span>Oleandrine</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q12" value="d"> 
-                        <span>Thuyone</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
+            <!-- Question 32 -->
             <div class="question" data-correct="b">
-                <div class="question-text">13. Quelle est la protéine extrêmement toxique du Ricin ?</div>
+                <div class="question-text">32. Qu'est-ce qu'un herbicide ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q13" value="a"> 
-                        <span>Curare</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q13" value="b"> 
-                        <span>Ricine</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q13" value="c"> 
-                        <span>Botuline</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q13" value="d"> 
-                        <span>Tétrodotoxine</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q32" value="a"> <span>Produit contre les insectes</span></label>
+                    <label class="option"><input type="radio" name="q32" value="b"> <span>Produit conçu pour éliminer les mauvaises herbes</span></label>
+                    <label class="option"><input type="radio" name="q32" value="c"> <span>Produit contre les champignons</span></label>
+                    <label class="option"><input type="radio" name="q32" value="d"> <span>Produit contre les rongeurs</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
-            <div class="question" data-correct="d">
-                <div class="question-text">14. Quel est le mécanisme d'action de la ricine ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q14" value="a"> 
-                        <span>Bloque les canaux sodiques</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q14" value="b"> 
-                        <span>Inhibe l'acétylcholinestérase</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q14" value="c"> 
-                        <span>Détruit les globules rouges</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q14" value="d"> 
-                        <span>Inhibe la synthèse des protéines cellulaires</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
+            <!-- Question 33 -->
             <div class="question" data-correct="c">
-                <div class="question-text">15. Quel est le principe toxique cardiaque du Laurier rose ?</div>
+                <div class="question-text">33. Quel produit cible les champignons ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q15" value="a"> 
-                        <span>Digitaline</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q15" value="b"> 
-                        <span>Strychnine</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q15" value="c"> 
-                        <span>Oléandrine</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q15" value="d"> 
-                        <span>Cyanure</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q33" value="a"> <span>Insecticide</span></label>
+                    <label class="option"><input type="radio" name="q33" value="b"> <span>Herbicide</span></label>
+                    <label class="option"><input type="radio" name="q33" value="c"> <span>Fongicide</span></label>
+                    <label class="option"><input type="radio" name="q33" value="d"> <span>Rodenticide</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 34 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">34. Que cible un rodenticide ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q34" value="a"> <span>Les insectes</span></label>
+                    <label class="option"><input type="radio" name="q34" value="b"> <span>Les champignons</span></label>
+                    <label class="option"><input type="radio" name="q34" value="c"> <span>Les herbes</span></label>
+                    <label class="option"><input type="radio" name="q34" value="d"> <span>Les rongeurs</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 35 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">35. Que sont les insecticides organochlorés ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q35" value="a"> <span>Composés à base de chlore, persistants et liposolubles (ex: DDT)</span></label>
+                    <label class="option"><input type="radio" name="q35" value="b"> <span>Composés à base de phosphore, rapidement dégradables</span></label>
+                    <label class="option"><input type="radio" name="q35" value="c"> <span>Composés d'origine naturelle extraits des plantes</span></label>
+                    <label class="option"><input type="radio" name="q35" value="d"> <span>Composés à base de carbone uniquement</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 36 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">36. Définition de la DL50 :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q36" value="a"> <span>Dose légale autorisée</span></label>
+                    <label class="option"><input type="radio" name="q36" value="b"> <span>Durée de vie moyenne</span></label>
+                    <label class="option"><input type="radio" name="q36" value="c"> <span>Dose létale qui provoque la mort de 50% d'une population animale testée</span></label>
+                    <label class="option"><input type="radio" name="q36" value="d"> <span>Dose limite d'application recommandée</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 37 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">37. Qu'est-ce que la CL50 ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q37" value="a"> <span>Concentration légale maximale</span></label>
+                    <label class="option"><input type="radio" name="q37" value="b"> <span>Concentration létale dans l'air ou l'eau tuant 50% des organismes testés</span></label>
+                    <label class="option"><input type="radio" name="q37" value="c"> <span>Concentration limite d'application</span></label>
+                    <label class="option"><input type="radio" name="q37" value="d"> <span>Concentration maximale résiduelle</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 38 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">38. Que signifie LMR ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q38" value="a"> <span>Limite Maximale de Résidus autorisée dans les produits alimentaires</span></label>
+                    <label class="option"><input type="radio" name="q38" value="b"> <span>Loi sur les Matières Radioactives</span></label>
+                    <label class="option"><input type="radio" name="q38" value="c"> <span>Limite Minimum de Résidus</span></label>
+                    <label class="option"><input type="radio" name="q38" value="d"> <span>Loi sur la Manipulation des Risques</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 39 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">39. Pourquoi le DDT est-il restreint ou interdit ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q39" value="a"> <span>Parce qu'il est trop cher</span></label>
+                    <label class="option"><input type="radio" name="q39" value="b"> <span>Parce qu'il n'est pas efficace</span></label>
+                    <label class="option"><input type="radio" name="q39" value="c"> <span>À cause de sa persistance environnementale et de sa bioaccumulation</span></label>
+                    <label class="option"><input type="radio" name="q39" value="d"> <span>Parce qu'il est inflammable</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 40 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">40. Quel est le classement IARC du DDT ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q40" value="a"> <span>Cancérogène certain pour l'homme (groupe 1)</span></label>
+                    <label class="option"><input type="radio" name="q40" value="b"> <span>Probablement cancérogène pour l'homme (groupe 2A)</span></label>
+                    <label class="option"><input type="radio" name="q40" value="c"> <span>Peut-être cancérogène pour l'homme (groupe 2B)</span></label>
+                    <label class="option"><input type="radio" name="q40" value="d"> <span>Non classifiable (groupe 3)</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 41 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">41. Le DDT a été massivement utilisé contre quelle maladie ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q41" value="a"> <span>La tuberculose</span></label>
+                    <label class="option"><input type="radio" name="q41" value="b"> <span>La grippe</span></label>
+                    <label class="option"><input type="radio" name="q41" value="c"> <span>Le choléra</span></label>
+                    <label class="option"><input type="radio" name="q41" value="d"> <span>Le paludisme</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 42 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">42. Où s'accumulent les pesticides liposolubles dans le corps ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q42" value="a"> <span>Dans les tissus gras</span></label>
+                    <label class="option"><input type="radio" name="q42" value="b"> <span>Dans les os</span></label>
+                    <label class="option"><input type="radio" name="q42" value="c"> <span>Dans le foie</span></label>
+                    <label class="option"><input type="radio" name="q42" value="d"> <span>Dans les reins</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 43 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">43. Qu'est-ce que la biomagnification ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q43" value="a"> <span>La dégradation des pesticides par les bactéries</span></label>
+                    <label class="option"><input type="radio" name="q43" value="b"> <span>La dilution des toxiques dans l'environnement</span></label>
+                    <label class="option"><input type="radio" name="q43" value="c"> <span>L'augmentation de la concentration d'un toxique tout au long de la chaîne alimentaire</span></label>
+                    <label class="option"><input type="radio" name="q43" value="d"> <span>La transformation des pesticides en produits moins toxiques</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 44 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">44. Quelle est l'unité de mesure de la DL50 ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q44" value="a"> <span>Grammes par litre</span></label>
+                    <label class="option"><input type="radio" name="q44" value="b"> <span>mg de substance par kg de poids corporel</span></label>
+                    <label class="option"><input type="radio" name="q44" value="c"> <span>Parties par million</span></label>
+                    <label class="option"><input type="radio" name="q44" value="d"> <span>Microgrammes par mètre cube</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 45 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">45. Le délai de sécurité (DS) protège qui en priorité ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q45" value="a"> <span>Les consommateurs</span></label>
+                    <label class="option"><input type="radio" name="q45" value="b"> <span>L'environnement</span></label>
+                    <label class="option"><input type="radio" name="q45" value="c"> <span>Les animaux sauvages</span></label>
+                    <label class="option"><input type="radio" name="q45" value="d"> <span>Les travailleurs agricoles</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
         </div>
         
-        <!-- Section 4: Bactérioses -->
-        <div class="section">
-            <h2 class="section-title">Partie 4: Bactérioses (Zoonoses bactériennes)</h2>
+        <!-- ============ PARTIE 4: PLANTES TOXIQUES ============ -->
+        <div class="section" id="section4">
+            <h2 class="section-title">Partie 4: Plantes toxiques</h2>
+            <div class="question-counter">Questions 46 à 60</div>
             
-            <div class="question" data-correct="a">
-                <div class="question-text">16. Agent responsable de la Leptospirose :</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q16" value="a"> 
-                        <span>Bactéries du genre Leptospira</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q16" value="b"> 
-                        <span>Mycobacterium bovis</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q16" value="c"> 
-                        <span>Salmonella enterica</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q16" value="d"> 
-                        <span>Escherichia coli</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
-            <div class="question" data-correct="b">
-                <div class="question-text">17. Quel est le réservoir principal de la Leptospirose ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q17" value="a"> 
-                        <span>Les bovins</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q17" value="b"> 
-                        <span>Les rongeurs, en particulier les rats</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q17" value="c"> 
-                        <span>Les oiseaux migrateurs</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q17" value="d"> 
-                        <span>Les animaux domestiques</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
+            <!-- Question 46 -->
             <div class="question" data-correct="c">
-                <div class="question-text">18. Agent responsable de la Tuberculose bovine :</div>
+                <div class="question-text">46. Quel est le nom scientifique de la Belladone ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q18" value="a"> 
-                        <span>Mycobacterium tuberculosis</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q18" value="b"> 
-                        <span>Mycobacterium leprae</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q18" value="c"> 
-                        <span>Mycobacterium bovis</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q18" value="d"> 
-                        <span>Mycobacterium avium</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q46" value="a"> <span>Datura stramonium</span></label>
+                    <label class="option"><input type="radio" name="q46" value="b"> <span>Nerium oleander</span></label>
+                    <label class="option"><input type="radio" name="q46" value="c"> <span>Atropa belladonna</span></label>
+                    <label class="option"><input type="radio" name="q46" value="d"> <span>Ricinus communis</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 47 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">47. Quelle famille botanique pour la Belladone ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q47" value="a"> <span>Apocynacées</span></label>
+                    <label class="option"><input type="radio" name="q47" value="b"> <span>Solanacées</span></label>
+                    <label class="option"><input type="radio" name="q47" value="c"> <span>Euphorbiacées</span></label>
+                    <label class="option"><input type="radio" name="q47" value="d"> <span>Cucurbitacées</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 48 -->
             <div class="question" data-correct="a">
-                <div class="question-text">19. Comment l'homme peut-il contracter la tuberculose bovine ?</div>
+                <div class="question-text">48. Quel est le composé toxique majeur de la Belladone ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q19" value="a"> 
-                        <span>Principalement par la consommation de lait non pasteurisé</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q19" value="b"> 
-                        <span>Par piqûre de tique</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q19" value="c"> 
-                        <span>Par contact avec des excréments de volaille</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q19" value="d"> 
-                        <span>Par morsure de rongeur</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q48" value="a"> <span>Hyoscyamine (alcaloïde tropanique)</span></label>
+                    <label class="option"><input type="radio" name="q48" value="b"> <span>Ricine</span></label>
+                    <label class="option"><input type="radio" name="q48" value="c"> <span>Oléandrine</span></label>
+                    <label class="option"><input type="radio" name="q48" value="d"> <span>Thuyone</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 49 -->
             <div class="question" data-correct="d">
-                <div class="question-text">20. Agent responsable des Salmonelloses :</div>
+                <div class="question-text">49. Nom scientifique du Laurier rose :</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q20" value="a"> 
-                        <span>Campylobacter jejuni</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q20" value="b"> 
-                        <span>Listeria monocytogenes</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q20" value="c"> 
-                        <span>Shigella dysenteriae</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q20" value="d"> 
-                        <span>Bactéries du genre Salmonella</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q49" value="a"> <span>Atropa belladonna</span></label>
+                    <label class="option"><input type="radio" name="q49" value="b"> <span>Datura stramonium</span></label>
+                    <label class="option"><input type="radio" name="q49" value="c"> <span>Ricinus communis</span></label>
+                    <label class="option"><input type="radio" name="q49" value="d"> <span>Nerium oleander</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 50 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">50. Nom scientifique du Ricin :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q50" value="a"> <span>Nerium oleander</span></label>
+                    <label class="option"><input type="radio" name="q50" value="b"> <span>Ricinus communis</span></label>
+                    <label class="option"><input type="radio" name="q50" value="c"> <span>Atropa belladonna</span></label>
+                    <label class="option"><input type="radio" name="q50" value="d"> <span>Datura stramonium</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 51 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">51. Quelle est la protéine extrêmement toxique du Ricin ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q51" value="a"> <span>Curare</span></label>
+                    <label class="option"><input type="radio" name="q51" value="b"> <span>Botuline</span></label>
+                    <label class="option"><input type="radio" name="q51" value="c"> <span>Ricine</span></label>
+                    <label class="option"><input type="radio" name="q51" value="d"> <span>Tétrodotoxine</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 52 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">52. Où la ricine est-elle la plus concentrée ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q52" value="a"> <span>Dans les graines</span></label>
+                    <label class="option"><input type="radio" name="q52" value="b"> <span>Dans les feuilles</span></label>
+                    <label class="option"><input type="radio" name="q52" value="c"> <span>Dans la tige</span></label>
+                    <label class="option"><input type="radio" name="q52" value="d"> <span>Dans les racines</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 53 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">53. Quel est le mécanisme d'action de la ricine ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q53" value="a"> <span>Bloque les canaux sodiques</span></label>
+                    <label class="option"><input type="radio" name="q53" value="b"> <span>Inhibe l'acétylcholinestérase</span></label>
+                    <label class="option"><input type="radio" name="q53" value="c"> <span>Détruit les globules rouges</span></label>
+                    <label class="option"><input type="radio" name="q53" value="d"> <span>Inhibe la synthèse des protéines cellulaires</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 54 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">54. L'huile de ricin est-elle toxique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q54" value="a"> <span>Oui, très toxique</span></label>
+                    <label class="option"><input type="radio" name="q54" value="b"> <span>Non, elle ne contient pas de ricine</span></label>
+                    <label class="option"><input type="radio" name="q54" value="c"> <span>Seulement si elle est chauffée</span></label>
+                    <label class="option"><input type="radio" name="q54" value="d"> <span>Seulement pour les enfants</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 55 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">55. Quel est le principe toxique cardiaque du Laurier rose ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q55" value="a"> <span>Digitaline</span></label>
+                    <label class="option"><input type="radio" name="q55" value="b"> <span>Strychnine</span></label>
+                    <label class="option"><input type="radio" name="q55" value="c"> <span>Oléandrine</span></label>
+                    <label class="option"><input type="radio" name="q55" value="d"> <span>Cyanure</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 56 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">56. Quelle plante provoque une violente irritation digestive surnommée "effet drastique" ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q56" value="a"> <span>La Coloquinte</span></label>
+                    <label class="option"><input type="radio" name="q56" value="b"> <span>Le Laurier rose</span></label>
+                    <label class="option"><input type="radio" name="q56" value="c"> <span>La Belladone</span></label>
+                    <label class="option"><input type="radio" name="q56" value="d"> <span>Le Ricin</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 57 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">57. Quelle plante est souvent utilisée comme ornementale pour sa résistance ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q57" value="a"> <span>La Belladone</span></label>
+                    <label class="option"><input type="radio" name="q57" value="b"> <span>Le Ricin</span></label>
+                    <label class="option"><input type="radio" name="q57" value="c"> <span>La Coloquinte</span></label>
+                    <label class="option"><input type="radio" name="q57" value="d"> <span>Le Laurier rose</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 58 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">58. En combien de temps la mort peut-elle survenir après ingestion de ricine sans traitement ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q58" value="a"> <span>En 1 à 2 heures</span></label>
+                    <label class="option"><input type="radio" name="q58" value="b"> <span>En 3 à 5 jours</span></label>
+                    <label class="option"><input type="radio" name="q58" value="c"> <span>En 1 à 2 semaines</span></label>
+                    <label class="option"><input type="radio" name="q58" value="d"> <span>En 1 mois</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 59 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">59. Nom scientifique de la Coloquinte :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q59" value="a"> <span>Nerium oleander</span></label>
+                    <label class="option"><input type="radio" name="q59" value="b"> <span>Atropa belladonna</span></label>
+                    <label class="option"><input type="radio" name="q59" value="c"> <span>Citrullus colocynthis</span></label>
+                    <label class="option"><input type="radio" name="q59" value="d"> <span>Datura stramonium</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 60 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">60. Nom scientifique du Datura :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q60" value="a"> <span>Datura stramonium</span></label>
+                    <label class="option"><input type="radio" name="q60" value="b"> <span>Nerium oleander</span></label>
+                    <label class="option"><input type="radio" name="q60" value="c"> <span>Atropa belladonna</span></label>
+                    <label class="option"><input type="radio" name="q60" value="d"> <span>Ricinus communis</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
         </div>
         
-        <!-- Section 5: Hépatites virales -->
-        <div class="section">
-            <h2 class="section-title">Partie 5: Parasitoses et Maladies virales (Hépatites A et E)</h2>
+        <!-- ============ PARTIE 5: BACTÉRIOSES ============ -->
+        <div class="section" id="section5">
+            <h2 class="section-title">Partie 5: Bactérioses (Zoonoses bactériennes)</h2>
+            <div class="question-counter">Questions 61 à 75</div>
             
-            <div class="question" data-correct="b">
-                <div class="question-text">21. Agent responsable de l'Hépatite A :</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q21" value="a"> 
-                        <span>Le virus de l'hépatite B (VHB)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q21" value="b"> 
-                        <span>Le virus de l'hépatite A (VHA)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q21" value="c"> 
-                        <span>Le virus de l'hépatite C (VHC)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q21" value="d"> 
-                        <span>Le virus de l'hépatite E (VHE)</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
+            <!-- Question 61 -->
             <div class="question" data-correct="a">
-                <div class="question-text">22. Comment se transmet l'Hépatite A ?</div>
+                <div class="question-text">61. Agent responsable de la Leptospirose :</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q22" value="a"> 
-                        <span>Par voie féco-orale (eau ou aliments contaminés)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q22" value="b"> 
-                        <span>Par voie sanguine exclusive</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q22" value="c"> 
-                        <span>Par voie aérienne (toux, éternuements)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q22" value="d"> 
-                        <span>Par contact sexuel</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q61" value="a"> <span>Bactéries du genre Leptospira</span></label>
+                    <label class="option"><input type="radio" name="q61" value="b"> <span>Mycobacterium bovis</span></label>
+                    <label class="option"><input type="radio" name="q61" value="c"> <span>Salmonella enterica</span></label>
+                    <label class="option"><input type="radio" name="q61" value="d"> <span>Escherichia coli</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
-            <div class="question" data-correct="d">
-                <div class="question-text">23. Quelle population est la plus à risque de forme fulminante de l'Hépatite E ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q23" value="a"> 
-                        <span>Les jeunes enfants</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q23" value="b"> 
-                        <span>Les personnes âgées</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q23" value="c"> 
-                        <span>Les immunodéprimés</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q23" value="d"> 
-                        <span>Les femmes enceintes, surtout au 3e trimestre</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
-            <div class="question" data-correct="c">
-                <div class="question-text">24. Existe-t-il un traitement antiviral spécifique pour l'Hépatite A ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q24" value="a"> 
-                        <span>Oui, un antiviral très efficace</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q24" value="b"> 
-                        <span>Oui, mais seulement pour les formes graves</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q24" value="c"> 
-                        <span>Non, le traitement est purement symptomatique</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q24" value="d"> 
-                        <span>Non, mais la vaccination curative existe</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
+            <!-- Question 62 -->
             <div class="question" data-correct="b">
-                <div class="question-text">25. L'Hépatite A devient-elle chronique ?</div>
+                <div class="question-text">62. Quel est le réservoir principal de la Leptospirose ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q25" value="a"> 
-                        <span>Oui, dans 30% des cas</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q25" value="b"> 
-                        <span>Non, elle est généralement aiguë et guérit spontanément</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q25" value="c"> 
-                        <span>Oui, surtout chez les personnes âgées</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q25" value="d"> 
-                        <span>Seulement chez les immunodéprimés</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q62" value="a"> <span>Les bovins</span></label>
+                    <label class="option"><input type="radio" name="q62" value="b"> <span>Les rongeurs, en particulier les rats</span></label>
+                    <label class="option"><input type="radio" name="q62" value="c"> <span>Les oiseaux migrateurs</span></label>
+                    <label class="option"><input type="radio" name="q62" value="d"> <span>Les animaux domestiques</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 63 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">63. Comment se transmet la Leptospirose à l'homme ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q63" value="a"> <span>Par morsure de rat</span></label>
+                    <label class="option"><input type="radio" name="q63" value="b"> <span>Par inhalation de poussières</span></label>
+                    <label class="option"><input type="radio" name="q63" value="c"> <span>Par contact avec de l'eau ou un sol contaminé par l'urine d'animaux infectés</span></label>
+                    <label class="option"><input type="radio" name="q63" value="d"> <span>Par consommation de viande crue</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 64 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">64. Quels sont les organes cibles de la Leptospirose ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q64" value="a"> <span>Le foie (jaunisse) et les reins</span></label>
+                    <label class="option"><input type="radio" name="q64" value="b"> <span>Les poumons et le cœur</span></label>
+                    <label class="option"><input type="radio" name="q64" value="c"> <span>Le système nerveux central</span></label>
+                    <label class="option"><input type="radio" name="q64" value="d"> <span>La peau et les muqueuses</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 65 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">65. Agent responsable de la Tuberculose bovine :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q65" value="a"> <span>Mycobacterium tuberculosis</span></label>
+                    <label class="option"><input type="radio" name="q65" value="b"> <span>Mycobacterium leprae</span></label>
+                    <label class="option"><input type="radio" name="q65" value="c"> <span>Mycobacterium bovis</span></label>
+                    <label class="option"><input type="radio" name="q65" value="d"> <span>Mycobacterium avium</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 66 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">66. Comment l'homme peut-il contracter la tuberculose bovine ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q66" value="a"> <span>Principalement par la consommation de lait non pasteurisé</span></label>
+                    <label class="option"><input type="radio" name="q66" value="b"> <span>Par piqûre de tique</span></label>
+                    <label class="option"><input type="radio" name="q66" value="c"> <span>Par contact avec des excréments de volaille</span></label>
+                    <label class="option"><input type="radio" name="q66" value="d"> <span>Par morsure de rongeur</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 67 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">67. Agent responsable des Salmonelloses :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q67" value="a"> <span>Campylobacter jejuni</span></label>
+                    <label class="option"><input type="radio" name="q67" value="b"> <span>Listeria monocytogenes</span></label>
+                    <label class="option"><input type="radio" name="q67" value="c"> <span>Shigella dysenteriae</span></label>
+                    <label class="option"><input type="radio" name="q67" value="d"> <span>Bactéries du genre Salmonella</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 68 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">68. Quelles sont les sources de contamination par Salmonella ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q68" value="a"> <span>Eau de piscine</span></label>
+                    <label class="option"><input type="radio" name="q68" value="b"> <span>Légumes crus uniquement</span></label>
+                    <label class="option"><input type="radio" name="q68" value="c"> <span>Œufs crus, viande mal cuite et produits laitiers non pasteurisés</span></label>
+                    <label class="option"><input type="radio" name="q68" value="d"> <span>Viande de poisson uniquement</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 69 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">69. Quels sont les symptômes d'une gastro-entérite à Salmonella ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q69" value="a"> <span>Diarrhée, fièvre, douleurs abdominales et vomissements</span></label>
+                    <label class="option"><input type="radio" name="q69" value="b"> <span>Toux, essoufflement, douleur thoracique</span></label>
+                    <label class="option"><input type="radio" name="q69" value="c"> <span>Paralysie, troubles visuels, difficulté à avaler</span></label>
+                    <label class="option"><input type="radio" name="q69" value="d"> <span>Éruption cutanée, démangeaisons, gonflement</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 70 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">70. La tuberculose bovine est-elle une maladie à évolution rapide ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q70" value="a"> <span>Oui, très rapide (quelques jours)</span></label>
+                    <label class="option"><input type="radio" name="q70" value="b"> <span>Non, elle évolue lentement</span></label>
+                    <label class="option"><input type="radio" name="q70" value="c"> <span>Elle est toujours foudroyante</span></label>
+                    <label class="option"><input type="radio" name="q70" value="d"> <span>Variable selon l'âge</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 71 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">71. Quel est le taux de mortalité de la Leptospirose grave chez l'homme ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q71" value="a"> <span>Moins de 1%</span></label>
+                    <label class="option"><input type="radio" name="q71" value="b"> <span>1 à 5%</span></label>
+                    <label class="option"><input type="radio" name="q71" value="c"> <span>5 à 20%</span></label>
+                    <label class="option"><input type="radio" name="q71" value="d"> <span>Plus de 50%</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 72 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">72. La pasteurisation du lait protège de quelle bactérie mentionnée ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q72" value="a"> <span>Mycobacterium bovis</span></label>
+                    <label class="option"><input type="radio" name="q72" value="b"> <span>Leptospira interrogans</span></label>
+                    <label class="option"><input type="radio" name="q72" value="c"> <span>Salmonella typhi</span></label>
+                    <label class="option"><input type="radio" name="q72" value="d"> <span>Toutes ces bactéries</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 73 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">73. Les salmonelloses causent quel type d'infection ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q73" value="a"> <span>Infections respiratoires</span></label>
+                    <label class="option"><input type="radio" name="q73" value="b"> <span>Gastro-entérites</span></label>
+                    <label class="option"><input type="radio" name="q73" value="c"> <span>Infections urinaires</span></label>
+                    <label class="option"><input type="radio" name="q73" value="d"> <span>Infections cutanées</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 74 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">74. Que signifie "maladie auto-limitée" ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q74" value="a"> <span>Maladie qui se limite à un organe</span></label>
+                    <label class="option"><input type="radio" name="q74" value="b"> <span>Maladie chronique</span></label>
+                    <label class="option"><input type="radio" name="q74" value="c"> <span>Maladie qui nécessite toujours un traitement</span></label>
+                    <label class="option"><input type="radio" name="q74" value="d"> <span>Maladie qui guérit d'elle-même sans traitement spécifique</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 75 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">75. Les rongeurs sont-ils malades de la Leptospirose ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q75" value="a"> <span>Oui, ils en meurent rapidement</span></label>
+                    <label class="option"><input type="radio" name="q75" value="b"> <span>Oui, mais avec des symptômes légers</span></label>
+                    <label class="option"><input type="radio" name="q75" value="c"> <span>Non, ils sont des réservoirs sains qui excrètent la bactérie</span></label>
+                    <label class="option"><input type="radio" name="q75" value="d"> <span>Seulement les jeunes rongeurs</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
         </div>
         
-        <!-- Section 6: Substances addictives -->
-        <div class="section">
-            <h2 class="section-title">Partie 6: Substances addictives (Alcool, Cannabis, Benzodiazépines)</h2>
+        <!-- ============ PARTIE 6: HÉPATITES VIRALES ============ -->
+        <div class="section" id="section6">
+            <h2 class="section-title">Partie 6: Hépatites virales A et E</h2>
+            <div class="question-counter">Questions 76 à 90</div>
             
-            <div class="question" data-correct="a">
-                <div class="question-text">26. Origine étymologique du mot "addiction" :</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q26" value="a"> 
-                        <span>Du latin addictere (esclavage par le corps)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q26" value="b"> 
-                        <span>Du grec adikia (injustice)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q26" value="c"> 
-                        <span>De l'arbe adda (habitude)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q26" value="d"> 
-                        <span>De l'anglais addict (accro)</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
-            <div class="question" data-correct="c">
-                <div class="question-text">27. Que signifient les "5 C" de l'addiction ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q27" value="a"> 
-                        <span>Choix, Contrôle, Compulsion, Continuité, Conséquences</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q27" value="b"> 
-                        <span>Cachette, Craving, Consommation, Chronique, Cerveau</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q27" value="c"> 
-                        <span>Perte de Contrôle, Craving, usage Compulsif, usage Continu, malgré les Conséquences</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q27" value="d"> 
-                        <span>Compulsion, Cerveau, Corps, Comportement, Chimie</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
-            <div class="question" data-correct="d">
-                <div class="question-text">28. Qu'est-ce que le "Craving" ?</div>
-                <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q28" value="a"> 
-                        <span>Une perte de mémoire due à la drogue</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q28" value="b"> 
-                        <span>Un trouble du sommeil</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q28" value="c"> 
-                        <span>Une hallucination visuelle</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q28" value="d"> 
-                        <span>Une envie irrépressible de consommer la substance</span>
-                    </label>
-                </div>
-                <div class="feedback"></div>
-            </div>
-            
+            <!-- Question 76 -->
             <div class="question" data-correct="b">
-                <div class="question-text">29. Quel est le composé actif du Cannabis ?</div>
+                <div class="question-text">76. Agent responsable de l'Hépatite A :</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q29" value="a"> 
-                        <span>La cocaïne</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q29" value="b"> 
-                        <span>Le tétrahydrocannabinol (THC)</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q29" value="c"> 
-                        <span>La nicotine</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q29" value="d"> 
-                        <span>La caféine</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q76" value="a"> <span>Le virus de l'hépatite B (VHB)</span></label>
+                    <label class="option"><input type="radio" name="q76" value="b"> <span>Le virus de l'hépatite A (VHA)</span></label>
+                    <label class="option"><input type="radio" name="q76" value="c"> <span>Le virus de l'hépatite C (VHC)</span></label>
+                    <label class="option"><input type="radio" name="q76" value="d"> <span>Le virus de l'hépatite E (VHE)</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
             
+            <!-- Question 77 -->
             <div class="question" data-correct="a">
-                <div class="question-text">30. Quelle est la durée maximale de prescription pour une benzodiazépine anxiolytique ?</div>
+                <div class="question-text">77. Comment se transmet l'Hépatite A ?</div>
                 <div class="options">
-                    <label class="option">
-                        <input type="radio" name="q30" value="a"> 
-                        <span>12 semaines</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q30" value="b"> 
-                        <span>6 mois</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q30" value="c"> 
-                        <span>1 an</span>
-                    </label>
-                    <label class="option">
-                        <input type="radio" name="q30" value="d"> 
-                        <span>2 ans</span>
-                    </label>
+                    <label class="option"><input type="radio" name="q77" value="a"> <span>Par voie féco-orale (eau ou aliments contaminés)</span></label>
+                    <label class="option"><input type="radio" name="q77" value="b"> <span>Par voie sanguine exclusive</span></label>
+                    <label class="option"><input type="radio" name="q77" value="c"> <span>Par voie aérienne (toux, éternuements)</span></label>
+                    <label class="option"><input type="radio" name="q77" value="d"> <span>Par contact sexuel</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 78 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">78. Agent responsable de l'Hépatite E :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q78" value="a"> <span>Le virus de l'hépatite A (VHA)</span></label>
+                    <label class="option"><input type="radio" name="q78" value="b"> <span>Le virus de l'hépatite B (VHB)</span></label>
+                    <label class="option"><input type="radio" name="q78" value="c"> <span>Le virus de l'hépatite C (VHC)</span></label>
+                    <label class="option"><input type="radio" name="q78" value="d"> <span>Le virus de l'hépatite E (VHE)</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 79 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">79. Quelle population est la plus à risque de forme fulminante de l'Hépatite E ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q79" value="a"> <span>Les jeunes enfants</span></label>
+                    <label class="option"><input type="radio" name="q79" value="b"> <span>Les personnes âgées</span></label>
+                    <label class="option"><input type="radio" name="q79" value="c"> <span>Les immunodéprimés</span></label>
+                    <label class="option"><input type="radio" name="q79" value="d"> <span>Les femmes enceintes, surtout au 3e trimestre</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 80 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">80. Existe-t-il un traitement antiviral spécifique pour l'Hépatite A ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q80" value="a"> <span>Oui, un antiviral très efficace</span></label>
+                    <label class="option"><input type="radio" name="q80" value="b"> <span>Oui, mais seulement pour les formes graves</span></label>
+                    <label class="option"><input type="radio" name="q80" value="c"> <span>Non, le traitement est purement symptomatique</span></label>
+                    <label class="option"><input type="radio" name="q80" value="d"> <span>Non, mais la vaccination curative existe</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 81 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">81. L'Hépatite A devient-elle chronique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q81" value="a"> <span>Oui, dans 30% des cas</span></label>
+                    <label class="option"><input type="radio" name="q81" value="b"> <span>Non, elle est généralement aiguë et guérit spontanément</span></label>
+                    <label class="option"><input type="radio" name="q81" value="c"> <span>Oui, surtout chez les personnes âgées</span></label>
+                    <label class="option"><input type="radio" name="q81" value="d"> <span>Seulement chez les immunodéprimés</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 82 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">82. Comment prévenir les Hépatites A et E ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q82" value="a"> <span>Par l'hygiène (lavage des mains, assainissement de l'eau)</span></label>
+                    <label class="option"><input type="radio" name="q82" value="b"> <span>Par vaccination obligatoire</span></label>
+                    <label class="option"><input type="radio" name="q82" value="c"> <span>Par prise d'antibiotiques préventifs</span></label>
+                    <label class="option"><input type="radio" name="q82" value="d"> <span>Par éviction des personnes malades</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 83 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">83. L'Hépatite E est-elle grave pour tout le monde ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q83" value="a"> <span>Oui, toujours mortelle</span></label>
+                    <label class="option"><input type="radio" name="q83" value="b"> <span>Oui, elle devient toujours chronique</span></label>
+                    <label class="option"><input type="radio" name="q83" value="c"> <span>Oui, sauf pour les enfants</span></label>
+                    <label class="option"><input type="radio" name="q83" value="d"> <span>Non, elle est généralement bénigne, sauf pour les groupes à risque</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 84 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">84. Quelle est la principale voie de contamination par le VHE ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q84" value="a"> <span>L'eau de boisson contaminée</span></label>
+                    <label class="option"><input type="radio" name="q84" value="b"> <span>La transfusion sanguine</span></label>
+                    <label class="option"><input type="radio" name="q84" value="c"> <span>Les relations sexuelles</span></label>
+                    <label class="option"><input type="radio" name="q84" value="d"> <span>La piqûre de moustique</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 85 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">85. Qu'est-ce qu'une hépatite fulminante ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q85" value="a"> <span>Une hépatite très contagieuse</span></label>
+                    <label class="option"><input type="radio" name="q85" value="b"> <span>Une hépatite chronique</span></label>
+                    <label class="option"><input type="radio" name="q85" value="c"> <span>Une destruction massive et rapide du foie mettant en jeu le pronostic vital</span></label>
+                    <label class="option"><input type="radio" name="q85" value="d"> <span>Une hépatite sans symptômes</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 86 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">86. Peut-on utiliser le paracétamol sans limite lors d'une hépatite ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q86" value="a"> <span>Oui, sans problème</span></label>
+                    <label class="option"><input type="radio" name="q86" value="b"> <span>Non, seulement à dose modérée car le foie est déjà fragilisé</span></label>
+                    <label class="option"><input type="radio" name="q86" value="c"> <span>Non, il est totalement interdit</span></label>
+                    <label class="option"><input type="radio" name="q86" value="d"> <span>Seulement sous surveillance médicale</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 87 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">87. Les hépatites A et E sont-elles des maladies chroniques ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q87" value="a"> <span>Non, ce sont des infections virales aiguës</span></label>
+                    <label class="option"><input type="radio" name="q87" value="b"> <span>Oui, toujours</span></label>
+                    <label class="option"><input type="radio" name="q87" value="c"> <span>Seulement l'hépatite A</span></label>
+                    <label class="option"><input type="radio" name="q87" value="d"> <span>Seulement l'hépatite E</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 88 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">88. Quel organe est la cible principale des virus des hépatites ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q88" value="a"> <span>Les reins</span></label>
+                    <label class="option"><input type="radio" name="q88" value="b"> <span>Les poumons</span></label>
+                    <label class="option"><input type="radio" name="q88" value="c"> <span>Le foie</span></label>
+                    <label class="option"><input type="radio" name="q88" value="d"> <span>Le cœur</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 89 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">89. La fatigue est-elle un symptôme des hépatites ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q89" value="a"> <span>Non, jamais</span></label>
+                    <label class="option"><input type="radio" name="q89" value="b"> <span>Oui, très fréquente</span></label>
+                    <label class="option"><input type="radio" name="q89" value="c"> <span>Seulement dans les formes graves</span></label>
+                    <label class="option"><input type="radio" name="q89" value="d"> <span>Seulement pour l'hépatite A</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 90 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">90. La grossesse aggrave quelle hépatite ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q90" value="a"> <span>L'hépatite A</span></label>
+                    <label class="option"><input type="radio" name="q90" value="b"> <span>L'hépatite B</span></label>
+                    <label class="option"><input type="radio" name="q90" value="c"> <span>L'hépatite E</span></label>
+                    <label class="option"><input type="radio" name="q90" value="d"> <span>L'hépatite C</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+        </div>
+        
+        <!-- ============ PARTIE 7: ADDICTIONS ============ -->
+        <div class="section" id="section7">
+            <h2 class="section-title">Partie 7: Substances addictives (Alcool, Cannabis, Benzodiazépines)</h2>
+            <div class="question-counter">Questions 91 à 105</div>
+            
+            <!-- Question 91 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">91. Origine étymologique du mot "addiction" :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q91" value="a"> <span>Du latin addictere (esclavage par le corps)</span></label>
+                    <label class="option"><input type="radio" name="q91" value="b"> <span>Du grec adikia (injustice)</span></label>
+                    <label class="option"><input type="radio" name="q91" value="c"> <span>De l'arabe adda (habitude)</span></label>
+                    <label class="option"><input type="radio" name="q91" value="d"> <span>De l'anglais addict (accro)</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 92 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">92. Que signifient les "5 C" de l'addiction ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q92" value="a"> <span>Choix, Contrôle, Compulsion, Continuité, Conséquences</span></label>
+                    <label class="option"><input type="radio" name="q92" value="b"> <span>Cachette, Craving, Consommation, Chronique, Cerveau</span></label>
+                    <label class="option"><input type="radio" name="q92" value="c"> <span>Perte de Contrôle, Craving, usage Compulsif, usage Continu, malgré les Conséquences</span></label>
+                    <label class="option"><input type="radio" name="q92" value="d"> <span>Compulsion, Cerveau, Corps, Comportement, Chimie</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 93 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">93. Qu'est-ce que le "Craving" ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q93" value="a"> <span>Une perte de mémoire due à la drogue</span></label>
+                    <label class="option"><input type="radio" name="q93" value="b"> <span>Un trouble du sommeil</span></label>
+                    <label class="option"><input type="radio" name="q93" value="c"> <span>Une hallucination visuelle</span></label>
+                    <label class="option"><input type="radio" name="q93" value="d"> <span>Une envie irrépressible de consommer la substance</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 94 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">94. Définition d'une substance psychoactive :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q94" value="a"> <span>Substance qui modifie uniquement l'humeur</span></label>
+                    <label class="option"><input type="radio" name="q94" value="b"> <span>Composé qui altère les processus mentaux (perception, conscience, humeur)</span></label>
+                    <label class="option"><input type="radio" name="q94" value="c"> <span>Substance qui guérit les troubles mentaux</span></label>
+                    <label class="option"><input type="radio" name="q94" value="d"> <span>Médicament prescrit par un psychiatre</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 95 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">95. Quel est le composé actif du Cannabis ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q95" value="a"> <span>Le tétrahydrocannabinol (THC)</span></label>
+                    <label class="option"><input type="radio" name="q95" value="b"> <span>La cocaïne</span></label>
+                    <label class="option"><input type="radio" name="q95" value="c"> <span>La nicotine</span></label>
+                    <label class="option"><input type="radio" name="q95" value="d"> <span>La caféine</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 96 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">96. Quels sont les effets de l'ivresse cannabique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q96" value="a"> <span>Paralysie et cécité</span></label>
+                    <label class="option"><input type="radio" name="q96" value="b"> <span>Coma profond</span></label>
+                    <label class="option"><input type="radio" name="q96" value="c"> <span>Altération de la coordination, tachycardie, yeux rouges et augmentation de l'appétit</span></label>
+                    <label class="option"><input type="radio" name="q96" value="d"> <span>Hallucinations auditives seulement</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 97 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">97. Qu'est-ce que le syndrome de sevrage ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q97" value="a"> <span>Une intoxication aiguë</span></label>
+                    <label class="option"><input type="radio" name="q97" value="b"> <span>L'inconfort physique et psychique lié à l'absence du produit</span></label>
+                    <label class="option"><input type="radio" name="q97" value="c"> <span>L'effet recherché de la drogue</span></label>
+                    <label class="option"><input type="radio" name="q97" value="d"> <span>La période d'intoxication maximale</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 98 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">98. Quelle est la durée maximale de prescription pour une benzodiazépine anxiolytique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q98" value="a"> <span>12 semaines</span></label>
+                    <label class="option"><input type="radio" name="q98" value="b"> <span>6 mois</span></label>
+                    <label class="option"><input type="radio" name="q98" value="c"> <span>1 an</span></label>
+                    <label class="option"><input type="radio" name="q98" value="d"> <span>2 ans</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 99 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">99. Quels sont les signes d'une intoxication aiguë aux Benzodiazépines ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q99" value="a"> <span>Hallucinations et agitation</span></label>
+                    <label class="option"><input type="radio" name="q99" value="b"> <span>Tremblements et convulsions</span></label>
+                    <label class="option"><input type="radio" name="q99" value="c"> <span>Sédation, troubles de la vigilance, ataxie, dysarthrie et coma</span></label>
+                    <label class="option"><input type="radio" name="q99" value="d"> <span>Hypertension et tachycardie</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 100 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">100. Pourquoi ne faut-il pas associer deux anxiolytiques ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q100" value="a"> <span>Parce que c'est trop cher</span></label>
+                    <label class="option"><input type="radio" name="q100" value="b"> <span>Pour éviter les risques de surdosage et de dépendance accrue</span></label>
+                    <label class="option"><input type="option" name="q100" value="c"> <span>Parce que les effets s'annulent</span></label>
+                    <label class="option"><input type="radio" name="q100" value="d"> <span>Parce que c'est inefficace</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 101 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">101. Quelle est l'origine de la Cocaïne ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q101" value="a"> <span>Extraite du pavot</span></label>
+                    <label class="option"><input type="radio" name="q101" value="b"> <span>Synthétisée en laboratoire</span></label>
+                    <label class="option"><input type="radio" name="q101" value="c"> <span>Extraite du cannabis</span></label>
+                    <label class="option"><input type="radio" name="q101" value="d"> <span>Extraite des feuilles de coca</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 102 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">102. Qu'est-ce que l'ataxie ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q102" value="a"> <span>Un trouble de la coordination des mouvements</span></label>
+                    <label class="option"><input type="radio" name="q102" value="b"> <span>Une perte de mémoire</span></label>
+                    <label class="option"><input type="radio" name="q102" value="c"> <span>Une hallucination</span></label>
+                    <label class="option"><input type="radio" name="q102" value="d"> <span>Un trouble du langage</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 103 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">103. Qu'est-ce que la tolérance à une drogue ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q103" value="a"> <span>L'acceptation sociale de la drogue</span></label>
+                    <label class="option"><input type="radio" name="q103" value="b"> <span>La nécessité d'augmenter les doses pour obtenir le même effet</span></label>
+                    <label class="option"><input type="radio" name="q103" value="c"> <span>La capacité à supporter les effets secondaires</span></label>
+                    <label class="option"><input type="radio" name="q103" value="d"> <span>La période d'abstinence</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 104 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">104. L'addiction est-elle considérée comme une maladie chronique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q104" value="a"> <span>Non, c'est un choix</span></label>
+                    <label class="option"><input type="radio" name="q104" value="b"> <span>Non, c'est un vice</span></label>
+                    <label class="option"><input type="radio" name="q104" value="c"> <span>Oui, une affection chronique récurrente</span></label>
+                    <label class="option"><input type="radio" name="q104" value="d"> <span>Seulement pour certaines substances</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 105 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">105. Une overdose peut-elle être mortelle ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q105" value="a"> <span>Non, jamais</span></label>
+                    <label class="option"><input type="radio" name="q105" value="b"> <span>Seulement pour certaines drogues</span></label>
+                    <label class="option"><input type="radio" name="q105" value="c"> <span>Seulement si elle n'est pas traitée</span></label>
+                    <label class="option"><input type="radio" name="q105" value="d"> <span>Oui, elle constitue une urgence vitale</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+        </div>
+        
+        <!-- ============ PARTIE 8: ÉCOTOXICOLOGIE ============ -->
+        <div class="section" id="section8">
+            <h2 class="section-title">Partie 8: Écotoxicologie et Radiobiologie</h2>
+            <div class="question-counter">Questions 106 à 120</div>
+            
+            <!-- Question 106 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">106. Définition de l'écotoxicologie :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q106" value="a"> <span>L'étude des écosystèmes uniquement</span></label>
+                    <label class="option"><input type="radio" name="q106" value="b"> <span>La branche de la toxicologie qui étudie les effets des substances toxiques sur les organismes vivants et les écosystèmes</span></label>
+                    <label class="option"><input type="radio" name="q106" value="c"> <span>L'étude de la toxicologie en milieu urbain</span></label>
+                    <label class="option"><input type="radio" name="q106" value="d"> <span>La science de la décontamination des sols</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 107 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">107. Qu'est-ce que la bioaccumulation ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q107" value="a"> <span>La dégradation des polluants par les bactéries</span></label>
+                    <label class="option"><input type="radio" name="q107" value="b"> <span>La dilution des toxiques dans l'environnement</span></label>
+                    <label class="option"><input type="radio" name="q107" value="c"> <span>L'accumulation progressive de polluants dans les organismes vivants</span></label>
+                    <label class="option"><input type="radio" name="q107" value="d"> <span>La transformation des polluants en produits moins toxiques</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 108 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">108. Qu'est-ce que la biomagnification ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q108" value="a"> <span>L'accumulation dans un seul organe</span></label>
+                    <label class="option"><input type="radio" name="q108" value="b"> <span>La reproduction des organismes contaminés</span></label>
+                    <label class="option"><input type="radio" name="q108" value="c"> <span>La mesure de la toxicité</span></label>
+                    <label class="option"><input type="radio" name="q108" value="d"> <span>L'augmentation de la concentration d'un toxique à chaque niveau de la chaîne alimentaire</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 109 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">109. Quelle catastrophe industrielle célèbre est mentionnée dans le cours ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q109" value="a"> <span>Bhopal (1984) - fuite de gaz toxique</span></label>
+                    <label class="option"><input type="radio" name="q109" value="b"> <span>Tchernobyl (1986) - accident nucléaire</span></label>
+                    <label class="option"><input type="radio" name="q109" value="c"> <span>Fukushima (2011) - accident nucléaire</span></label>
+                    <label class="option"><input type="radio" name="q109" value="d"> <span>Toutes ces réponses</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 110 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">110. Définition de la radiobiologie :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q110" value="a"> <span>L'étude des rayons du soleil</span></label>
+                    <label class="option"><input type="radio" name="q110" value="b"> <span>L'étude des effets des rayonnements ionisants sur les organismes vivants</span></label>
+                    <label class="option"><input type="radio" name="q110" value="c"> <span>La science des radars</span></label>
+                    <label class="option"><input type="radio" name="q110" value="d"> <span>L'étude des ondes radio</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 111 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">111. Qu'arrive-t-il si un rayonnement transmet son énergie à une cellule ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q111" value="a"> <span>Rien, c'est sans danger</span></label>
+                    <label class="option"><input type="radio" name="q111" value="b"> <span>La cellule devient fluorescente</span></label>
+                    <label class="option"><input type="radio" name="q111" value="c"> <span>Cela peut entraîner une ionisation des molécules biologiques et des mutations de l'ADN</span></label>
+                    <label class="option"><input type="radio" name="q111" value="d"> <span>La cellule se divise plus rapidement</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 112 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">112. Citez deux types de rayonnements ionisants :</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q112" value="a"> <span>Ondes radio et micro-ondes</span></label>
+                    <label class="option"><input type="radio" name="q112" value="b"> <span>Lumière visible et infrarouge</span></label>
+                    <label class="option"><input type="radio" name="q112" value="c"> <span>Ultraviolets A et B</span></label>
+                    <label class="option"><input type="radio" name="q112" value="d"> <span>Rayons X et rayons gamma</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 113 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">113. Quelle est la différence entre ionisation et excitation ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q113" value="a"> <span>Dans l'ionisation, un électron quitte l'atome; dans l'excitation, il change de couche</span></label>
+                    <label class="option"><input type="radio" name="q113" value="b"> <span>L'ionisation est réversible, l'excitation non</span></label>
+                    <label class="option"><input type="radio" name="q113" value="c"> <span>L'ionisation concerne les atomes, l'excitation les molécules</span></label>
+                    <label class="option"><input type="radio" name="q113" value="d"> <span>Il n'y a pas de différence</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 114 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">114. Quelles sont les trois méthodes de protection contre la radiation externe ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q114" value="a"> <span>Médicaments, masques, gants</span></label>
+                    <label class="option"><input type="radio" name="q114" value="b"> <span>Vaccination, isolement, désinfection</span></label>
+                    <label class="option"><input type="radio" name="q114" value="c"> <span>Distance, temps et blindage (shielding)</span></label>
+                    <label class="option"><input type="radio" name="q114" value="d"> <span>Évacuation, confinement, filtration</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 115 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">115. Qu'est-ce qu'un effet biologique stochastique ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q115" value="a"> <span>Un effet qui apparaît au-delà d'un certain seuil de dose</span></label>
+                    <label class="option"><input type="radio" name="q115" value="b"> <span>Un effet dont la probabilité augmente avec la dose (ex: cancer), sans seuil défini</span></label>
+                    <label class="option"><input type="radio" name="q115" value="c"> <span>Un effet immédiat et visible</span></label>
+                    <label class="option"><input type="radio" name="q115" value="d"> <span>Un effet limité à la peau</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 116 -->
+            <div class="question" data-correct="a">
+                <div class="question-text">116. Qu'est-ce qu'un effet déterministe ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q116" value="a"> <span>Un effet qui apparaît au-delà d'un certain seuil de dose (ex: brûlure)</span></label>
+                    <label class="option"><input type="radio" name="q116" value="b"> <span>Un effet aléatoire</span></label>
+                    <label class="option"><input type="radio" name="q116" value="c"> <span>Un effet héréditaire</span></label>
+                    <label class="option"><input type="radio" name="q116" value="d"> <span>Un effet psychologique</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 117 -->
+            <div class="question" data-correct="d">
+                <div class="question-text">117. Quelle discipline s'occupe de la sécurité face aux rayons ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q117" value="a"> <span>La radiologie</span></label>
+                    <label class="option"><input type="radio" name="q117" value="b"> <span>La radiothérapie</span></label>
+                    <label class="option"><input type="radio" name="q117" value="c"> <span>La médecine nucléaire</span></label>
+                    <label class="option"><input type="radio" name="q117" value="d"> <span>La radioprotection</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 118 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">118. Pourquoi un tissu humide peut-il protéger les voies respiratoires ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q118" value="a"> <span>Il refroidit l'air inhalé</span></label>
+                    <label class="option"><input type="radio" name="q118" value="b"> <span>Il ajoute de l'humidité aux poumons</span></label>
+                    <label class="option"><input type="radio" name="q118" value="c"> <span>Il agit comme un filtre sommaire contre les poussières radioactives</span></label>
+                    <label class="option"><input type="radio" name="q118" value="d"> <span>Il neutralise les gaz toxiques</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 119 -->
+            <div class="question" data-correct="b">
+                <div class="question-text">119. Le plomb est-il un bon blindage ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q119" value="a"> <span>Non, il est trop léger</span></label>
+                    <label class="option"><input type="radio" name="q119" value="b"> <span>Oui, pour les rayons X et gamma</span></label>
+                    <label class="option"><input type="radio" name="q119" value="c"> <span>Seulement pour les particules alpha</span></label>
+                    <label class="option"><input type="radio" name="q119" value="d"> <span>Non, il est radioactif</span></label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+            
+            <!-- Question 120 -->
+            <div class="question" data-correct="c">
+                <div class="question-text">120. L'ozone protège de quel type de rayons ?</div>
+                <div class="options">
+                    <label class="option"><input type="radio" name="q120" value="a"> <span>Des rayons X</span></label>
+                    <label class="option"><input type="radio" name="q120" value="b"> <span>Des rayons gamma</span></label>
+                    <label class="option"><input type="radio" name="q120" value="c"> <span>Des rayons UV</span></label>
+                    <label class="option"><input type="radio" name="q120" value="d"> <span>Des micro-ondes</span></label>
                 </div>
                 <div class="feedback"></div>
             </div>
         </div>
         
         <div class="controls">
-            <button id="resetBtn">Réinitialiser le QCM</button>
-            <button id="submitBtn">Soumettre les réponses</button>
+            <button id="resetBtn">Réinitialiser tout</button>
+            <button id="submitSectionBtn">Soumettre cette section</button>
+            <button id="submitAllBtn">Soumettre toutes les sections</button>
         </div>
         
         <div class="results" id="results">
             <h2>Résultats du QCM</h2>
-            <div class="score" id="score">0/30</div>
+            <div class="score" id="score">0/120</div>
             <div class="score-text" id="scoreText"></div>
             <div class="progress-bar">
                 <div class="progress" id="progressBar"></div>
             </div>
             <p id="resultMessage"></p>
+            
+            <div class="section-scores" id="sectionScores">
+                <!-- Les scores par section seront insérés ici dynamiquement -->
+            </div>
+            
             <button id="restartBtn">Recommencer le QCM</button>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Navigation par onglets
+            const tabs = document.querySelectorAll('.tab');
+            const sections = document.querySelectorAll('.section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Mettre à jour les onglets
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Afficher la section correspondante
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    document.getElementById(targetSection).classList.add('active');
+                    
+                    // Faire défiler vers le haut de la section
+                    document.getElementById(targetSection).scrollIntoView({behavior: 'smooth'});
+                });
+            });
+            
+            // Gestion des questions
             const questions = document.querySelectorAll('.question');
-            const submitBtn = document.getElementById('submitBtn');
+            const submitAllBtn = document.getElementById('submitAllBtn');
+            const submitSectionBtn = document.getElementById('submitSectionBtn');
             const resetBtn = document.getElementById('resetBtn');
             const restartBtn = document.getElementById('restartBtn');
             const results = document.getElementById('results');
@@ -1012,44 +1909,43 @@
             const scoreText = document.getElementById('scoreText');
             const progressBar = document.getElementById('progressBar');
             const resultMessage = document.getElementById('resultMessage');
+            const sectionScores = document.getElementById('sectionScores');
             
-            // Gestion de la sélection des options
-            questions.forEach(question => {
-                const options = question.querySelectorAll('.option');
-                options.forEach(option => {
-                    const input = option.querySelector('input');
-                    input.addEventListener('change', function() {
-                        // Réinitialiser les sélections pour cette question
-                        options.forEach(opt => {
-                            opt.classList.remove('selected');
-                        });
-                        
-                        // Marquer l'option sélectionnée
-                        option.classList.add('selected');
-                        
-                        // Masquer tout feedback précédent
-                        const feedback = question.querySelector('.feedback');
-                        feedback.style.display = 'none';
-                    });
+            // Fonction pour calculer le score d'une section
+            function calculateSectionScore(sectionId) {
+                const sectionQuestions = document.querySelectorAll(`#${sectionId} .question`);
+                let sectionScore = 0;
+                
+                sectionQuestions.forEach(question => {
+                    const correctAnswer = question.getAttribute('data-correct');
+                    const selectedOption = question.querySelector('input:checked');
+                    
+                    if (selectedOption && selectedOption.value === correctAnswer) {
+                        sectionScore++;
+                    }
                 });
-            });
+                
+                return {
+                    score: sectionScore,
+                    total: sectionQuestions.length,
+                    percentage: Math.round((sectionScore / sectionQuestions.length) * 100)
+                };
+            }
             
-            // Soumettre les réponses
-            submitBtn.addEventListener('click', function() {
-                let score = 0;
-                let totalQuestions = questions.length;
+            // Fonction pour soumettre une section
+            function submitSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                const questions = section.querySelectorAll('.question');
                 
                 questions.forEach((question, index) => {
                     const correctAnswer = question.getAttribute('data-correct');
                     const selectedOption = question.querySelector('input:checked');
                     const feedback = question.querySelector('.feedback');
+                    const options = question.querySelectorAll('.option');
                     
                     if (selectedOption) {
-                        const options = question.querySelectorAll('.option');
-                        
                         if (selectedOption.value === correctAnswer) {
                             // Réponse correcte
-                            score++;
                             feedback.textContent = "Correct!";
                             feedback.className = "feedback correct";
                             
@@ -1085,7 +1981,6 @@
                         feedback.style.display = 'block';
                         
                         // Mettre en évidence la bonne réponse
-                        const options = question.querySelectorAll('.option');
                         options.forEach(option => {
                             const input = option.querySelector('input');
                             if (input.value === correctAnswer) {
@@ -1094,10 +1989,35 @@
                         });
                     }
                 });
+            }
+            
+            // Soumettre toutes les sections
+            submitAllBtn.addEventListener('click', function() {
+                let totalScore = 0;
+                let totalQuestions = 0;
+                const sectionResults = [];
+                
+                // Soumettre et calculer le score pour chaque section
+                sections.forEach(section => {
+                    const sectionId = section.id;
+                    const sectionResult = calculateSectionScore(sectionId);
+                    
+                    sectionResults.push({
+                        id: sectionId,
+                        name: getSectionName(sectionId),
+                        ...sectionResult
+                    });
+                    
+                    totalScore += sectionResult.score;
+                    totalQuestions += sectionResult.total;
+                    
+                    // Soumettre la section (afficher les réponses)
+                    submitSection(sectionId);
+                });
                 
                 // Afficher les résultats
-                const percentage = Math.round((score / totalQuestions) * 100);
-                scoreElement.textContent = `${score}/${totalQuestions}`;
+                const percentage = Math.round((totalScore / totalQuestions) * 100);
+                scoreElement.textContent = `${totalScore}/${totalQuestions}`;
                 progressBar.style.width = `${percentage}%`;
                 
                 // Message personnalisé selon le score
@@ -1115,11 +2035,36 @@
                     resultMessage.textContent = "Il serait utile de revoir le support de cours pour mieux comprendre les concepts de toxicologie.";
                 }
                 
+                // Afficher les scores par section
+                sectionScores.innerHTML = '';
+                sectionResults.forEach(result => {
+                    const scoreElement = document.createElement('div');
+                    scoreElement.className = 'section-score';
+                    scoreElement.innerHTML = `
+                        <h4>${result.name}</h4>
+                        <div class="section-score-value">${result.score}/${result.total}</div>
+                        <div>${result.percentage}%</div>
+                    `;
+                    sectionScores.appendChild(scoreElement);
+                });
+                
                 results.style.display = 'block';
                 window.scrollTo(0, document.body.scrollHeight);
             });
             
-            // Réinitialiser le QCM
+            // Soumettre la section actuelle
+            submitSectionBtn.addEventListener('click', function() {
+                const activeSection = document.querySelector('.section.active');
+                if (activeSection) {
+                    submitSection(activeSection.id);
+                    
+                    // Calculer et afficher le score de la section
+                    const sectionResult = calculateSectionScore(activeSection.id);
+                    alert(`Score pour cette section: ${sectionResult.score}/${sectionResult.total} (${sectionResult.percentage}%)`);
+                }
+            });
+            
+            // Réinitialiser tout
             resetBtn.addEventListener('click', function() {
                 questions.forEach(question => {
                     const options = question.querySelectorAll('.option');
@@ -1142,6 +2087,32 @@
                 window.scrollTo(0, 0);
             });
             
+            // Gestion de la sélection des options
+            questions.forEach(question => {
+                const options = question.querySelectorAll('.option');
+                options.forEach(option => {
+                    const input = option.querySelector('input');
+                    input.addEventListener('change', function() {
+                        // Réinitialiser les sélections pour cette question
+                        options.forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Marquer l'option sélectionnée
+                        option.classList.add('selected');
+                        
+                        // Masquer tout feedback précédent
+                        const feedback = question.querySelector('.feedback');
+                        feedback.style.display = 'none';
+                        
+                        // Retirer les classes correct/incorrect
+                        options.forEach(opt => {
+                            opt.classList.remove('correct', 'incorrect');
+                        });
+                    });
+                });
+            });
+            
             // Fonction utilitaire pour obtenir le texte de la bonne réponse
             function getAnswerText(value, question) {
                 const options = question.querySelectorAll('.option');
@@ -1152,6 +2123,21 @@
                     }
                 }
                 return '';
+            }
+            
+            // Fonction pour obtenir le nom de la section
+            function getSectionName(sectionId) {
+                const names = {
+                    'section1': 'Intro Toxicologie',
+                    'section2': 'Aluminium',
+                    'section3': 'Pesticides',
+                    'section4': 'Plantes toxiques',
+                    'section5': 'Bactérioses',
+                    'section6': 'Hépatites virales',
+                    'section7': 'Addictions',
+                    'section8': 'Écotoxicologie'
+                };
+                return names[sectionId] || sectionId;
             }
         });
     </script>
